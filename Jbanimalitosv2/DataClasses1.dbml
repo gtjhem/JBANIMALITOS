@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="animalitos" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=animalitos;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True" SettingsObjectName="Jbanimalitosv2.Properties.Settings" SettingsPropertyName="animalitosConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.[Sorteos&#xD;&#xA;]" Member="Sorteos__">
+    <Type Name="Sorteos__">
+      <Column Name="IdSorteos" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="sorteo" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="minimo" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="maximo" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="pagar" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="estatus" Type="System.String" DbType="NVarChar(1)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Horarios" Member="Horarios">
+    <Type Name="Horarios">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdSorteo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Horario" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>

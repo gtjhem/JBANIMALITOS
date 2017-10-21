@@ -42,8 +42,18 @@ namespace Jbanimalitosv2
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
- 
+
+            KeyCreator empezar = new KeyCreator();
+
+            string ser = "";
+            // serial 
+            ser = DateTime.Now.ToLongTimeString().ToString().Substring(0,2) +
+                DateTime.Now.ToLongTimeString().ToString().Substring(3, 2) +
+                DateTime.Now.ToLongTimeString().ToString().Substring(6, 2) +
+                empezar.Sertkt(6);
+
+           
+
             sr_loteria();
 
             if (this.cmbloteria.Items.Count > 0){
@@ -210,7 +220,12 @@ namespace Jbanimalitosv2
                     cont += 1;
                     msg = msg + " Debe Ingresar el monto " + Environment.NewLine;
                 }
-            }else
+
+                
+
+              
+            }
+            else
             {
                 if (this.Animal.Text == "")
                 {
@@ -223,6 +238,23 @@ namespace Jbanimalitosv2
                     msg = msg + " Indique el monto de la jugada" + Environment.NewLine;
                 }
             }
+
+
+            if (lstSorteos.CheckedItems.Count == 0) {
+
+                cont += 1;
+                msg = msg + " Selecciona la hora del Sorteo" + Environment.NewLine;
+            }else
+            {
+               // string vr_sorteo = lstSorteos.SelectedItem.ToString ();
+                //if (vr_sorteo  != "")
+               // {
+                //    string[] v = vr_sorteo.Split('-');
+
+//                }
+            }
+
+            
 
             return msg;
 
@@ -386,11 +418,6 @@ namespace Jbanimalitosv2
             {
                 e.Handled = true;
             }
-
-
-           
-
-
 
         }
 

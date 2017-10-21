@@ -47,7 +47,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.Hora = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
+            this.lblloteria = new System.Windows.Forms.Label();
             this.Minz = new System.Windows.Forms.LinkLabel();
             this.Cerrar = new System.Windows.Forms.LinkLabel();
             this.label4 = new System.Windows.Forms.Label();
@@ -294,7 +294,7 @@
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(195)))), ((int)(((byte)(56)))), ((int)(((byte)(37)))));
             this.panel2.Controls.Add(this.Hora);
             this.panel2.Controls.Add(this.label10);
-            this.panel2.Controls.Add(this.label9);
+            this.panel2.Controls.Add(this.lblloteria);
             this.panel2.Controls.Add(this.Minz);
             this.panel2.Controls.Add(this.Cerrar);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
@@ -327,17 +327,17 @@
             this.label10.TabIndex = 1;
             this.label10.Text = "Fecha:";
             // 
-            // label9
+            // lblloteria
             // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Verdana", 20F, System.Drawing.FontStyle.Bold);
-            this.label9.ForeColor = System.Drawing.Color.White;
-            this.label9.Location = new System.Drawing.Point(10, 24);
-            this.label9.Margin = new System.Windows.Forms.Padding(10, 15, 3, 0);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(288, 32);
-            this.label9.TabIndex = 16;
-            this.label9.Text = "Loteria Jhory Diaz";
+            this.lblloteria.AutoSize = true;
+            this.lblloteria.Font = new System.Drawing.Font("Verdana", 20F, System.Drawing.FontStyle.Bold);
+            this.lblloteria.ForeColor = System.Drawing.Color.White;
+            this.lblloteria.Location = new System.Drawing.Point(10, 24);
+            this.lblloteria.Margin = new System.Windows.Forms.Padding(10, 15, 3, 0);
+            this.lblloteria.Name = "lblloteria";
+            this.lblloteria.Size = new System.Drawing.Size(288, 32);
+            this.lblloteria.TabIndex = 16;
+            this.lblloteria.Text = "Loteria Jhory Diaz";
             // 
             // Minz
             // 
@@ -394,50 +394,11 @@
             this.Animales.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Animales.ForeColor = System.Drawing.Color.White;
             this.Animales.FormattingEnabled = true;
-            this.Animales.Items.AddRange(new object[] {
-            "0 - DELFIN",
-            "1 - CARNERO",
-            "2 - TORO",
-            "3 - CIEMPIES",
-            "4 - ALACRAN",
-            "5 - LEON",
-            "6 - RANA",
-            "7 - PERICO",
-            "8 - RATON",
-            "9 - AGUILA",
-            "10 - TIGRE",
-            "11 - GATO",
-            "12 - CABALLO",
-            "13 - MONO",
-            "14 - PALOMA",
-            "15 - ZORRO",
-            "16 - OSO",
-            "17 - PAVO",
-            "18 - BURRO",
-            "19 - CHIVO",
-            "20 - COCHINO",
-            "21 - GALLO",
-            "22 - CAMELLO",
-            "23 - ZEBRA",
-            "24 - IGUANA",
-            "25 - GALLINA",
-            "26 - VACA",
-            "27 - PERRO",
-            "28 - ZAMURO",
-            "29 - ELEFANTE",
-            "30 - CAIMAN",
-            "31 - LAPA",
-            "32 - ARDILLA",
-            "33 - PESCADO",
-            "34 - VENADO",
-            "35 - JIRAFA",
-            "36 - CULEBRA",
-            "38 - BALLENA"});
             this.Animales.Location = new System.Drawing.Point(179, 166);
             this.Animales.MultiColumn = true;
             this.Animales.Name = "Animales";
             this.Animales.Size = new System.Drawing.Size(308, 322);
-            this.Animales.TabIndex = 3;
+            this.Animales.TabIndex = 7;
             this.Animales.SelectedIndexChanged += new System.EventHandler(this.Animales_SelectedIndexChanged);
             // 
             // Animal
@@ -450,7 +411,7 @@
             this.Animal.Multiline = true;
             this.Animal.Name = "Animal";
             this.Animal.Size = new System.Drawing.Size(83, 27);
-            this.Animal.TabIndex = 4;
+            this.Animal.TabIndex = 2;
             this.Animal.TextChanged += new System.EventHandler(this.Animal_TextChanged);
             this.Animal.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Animal_KeyPress);
             // 
@@ -476,7 +437,7 @@
             this.Nombre.Name = "Nombre";
             this.Nombre.ReadOnly = true;
             this.Nombre.Size = new System.Drawing.Size(218, 27);
-            this.Nombre.TabIndex = 6;
+            this.Nombre.TabIndex = 3;
             this.Nombre.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label6
@@ -501,7 +462,7 @@
             this.Monto.Multiline = true;
             this.Monto.Name = "Monto";
             this.Monto.Size = new System.Drawing.Size(149, 27);
-            this.Monto.TabIndex = 8;
+            this.Monto.TabIndex = 4;
             this.Monto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Monto_KeyPress);
             // 
             // label7
@@ -528,7 +489,7 @@
             this.lstSorteos.Location = new System.Drawing.Point(175, 542);
             this.lstSorteos.Name = "lstSorteos";
             this.lstSorteos.Size = new System.Drawing.Size(313, 98);
-            this.lstSorteos.TabIndex = 10;
+            this.lstSorteos.TabIndex = 8;
             this.lstSorteos.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.lstSorteos_ItemCheck);
             // 
             // button1
@@ -540,7 +501,7 @@
             this.button1.Location = new System.Drawing.Point(718, 542);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(228, 98);
-            this.button1.TabIndex = 11;
+            this.button1.TabIndex = 6;
             this.button1.Text = "IMPRIMIR";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -606,8 +567,8 @@
             this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button2.Location = new System.Drawing.Point(719, 166);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(227, 38);
-            this.button2.TabIndex = 16;
+            this.button2.Size = new System.Drawing.Size(229, 38);
+            this.button2.TabIndex = 5;
             this.button2.Text = "AGREGAR";
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
@@ -627,7 +588,7 @@
             this.button3.Location = new System.Drawing.Point(494, 542);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(218, 52);
-            this.button3.TabIndex = 17;
+            this.button3.TabIndex = 9;
             this.button3.Text = "Quitar";
             this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.button3_Click);
@@ -641,7 +602,7 @@
             this.button4.Location = new System.Drawing.Point(494, 601);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(218, 39);
-            this.button4.TabIndex = 18;
+            this.button4.TabIndex = 10;
             this.button4.Text = "Limpiar";
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
@@ -680,8 +641,8 @@
             this.cmbloteria.FormattingEnabled = true;
             this.cmbloteria.Location = new System.Drawing.Point(296, 88);
             this.cmbloteria.Name = "cmbloteria";
-            this.cmbloteria.Size = new System.Drawing.Size(412, 26);
-            this.cmbloteria.TabIndex = 21;
+            this.cmbloteria.Size = new System.Drawing.Size(415, 26);
+            this.cmbloteria.TabIndex = 1;
             this.cmbloteria.SelectedIndexChanged += new System.EventHandler(this.cmbloteria_SelectedIndexChanged);
             // 
             // label12
@@ -789,7 +750,7 @@
         private System.Windows.Forms.LinkLabel Minz;
         private System.Windows.Forms.LinkLabel Cerrar;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label lblloteria;
         private System.Windows.Forms.Timer Relog;
         private System.Windows.Forms.Label Hora;
         private System.Windows.Forms.Button button3;

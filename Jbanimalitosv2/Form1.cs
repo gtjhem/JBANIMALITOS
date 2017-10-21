@@ -77,6 +77,8 @@ namespace Jbanimalitosv2
                     this.lstSorteos.Items.Add(aqui.HORA  + " - " + aqui.NOMBRE_SORTEO.ToString().ToUpper() + " - " + aqui.ID_SORTEO);
                 }
 
+                if (lstSorteos.Items.Count > 0 ) this.lstSorteos.SetItemChecked(0, true);
+
 
         }
         public void sr_loteria()
@@ -141,27 +143,35 @@ namespace Jbanimalitosv2
 
         private void button2_Click(object sender, EventArgs e)
         {
+            sr_agregar();
+        }
+
+        public void sr_agregar() {
+
             string msg = "";
 
             msg = validar();
 
-            if (msg == "") { 
-                if (Ticket.Items.Count <= 0) {
+            if (msg == "")
+            {
+                if (Ticket.Items.Count <= 0)
+                {
 
                     foreach (object itemChecked in lstSorteos.CheckedItems) // obtengo el valor seleccionado 
                     {
                         this.Ticket.Items.Add(itemChecked.ToString());
-                                        }
+                    }
 
                 }
-           
-                if (Animales.CheckedItems.Count > 0 )
+
+                if (Animales.CheckedItems.Count > 0)
                 {
                     this.Animal.Text = "";
                     this.Nombre.Text = "";
+                    
                     foreach (object seleccionados in Animales.CheckedItems)
                     {
-                        this.Ticket.Items.Add(seleccionados.ToString() + " - " + this.Monto.Text );
+                        this.Ticket.Items.Add(seleccionados.ToString() + " - " + this.Monto.Text);
                     }
                 }
                 else
@@ -170,13 +180,14 @@ namespace Jbanimalitosv2
 
                 }
 
-                
 
+                this.Monto.Text = "";
                 Calcular();
                 deseleccionar();
-            }else
+            }
+            else
             {
-                MessageBox.Show(msg, "Faltan Campos", MessageBoxButtons.OK , MessageBoxIcon.Information  );
+                MessageBox.Show(msg, "Faltan Campos", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
         
@@ -240,8 +251,16 @@ namespace Jbanimalitosv2
 
             }
             else if (Char.IsControl(e.KeyChar))
-            {           
-                e.Handled = false;
+            {
+                if (e.KeyChar == '\r')
+
+                {
+                    e.Handled = true;
+
+                }else{
+                    e.Handled = false;
+                }
+                
             }
             //SI lo activas permite usar el espacio
             //else if (Char.IsSeparator(e.KeyChar))
@@ -252,6 +271,14 @@ namespace Jbanimalitosv2
             {
                 e.Handled = true;
             }
+
+            if (e.KeyChar == '\r')
+            {
+               
+                sr_agregar();
+
+            }
+
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -339,7 +366,16 @@ namespace Jbanimalitosv2
             }
             else if (Char.IsControl(e.KeyChar))
             {
-                e.Handled = false;
+                if (e.KeyChar == '\r')
+
+                {
+
+                    e.Handled = true;
+
+                }else
+                {
+                    e.Handled = false;
+                }
             }
             //SI lo activas permite usar el espacio
             //else if (Char.IsSeparator(e.KeyChar))
@@ -351,9 +387,9 @@ namespace Jbanimalitosv2
                 e.Handled = true;
             }
 
+
            
 
-            
 
 
         }

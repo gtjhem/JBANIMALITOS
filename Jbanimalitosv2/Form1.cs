@@ -42,15 +42,76 @@ namespace Jbanimalitosv2
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.lstSorteos.SetItemChecked(0, true);
+            
+ 
+            sr_loteria();
 
-            animalitos db = new animalitos(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=animalitos;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True");
-            var query = from qrysorteos in db.dbSorteos where qrysorteos.estatus == "A" select qrysorteos;
-            foreach (var qrysorteos in query)
-                //Console.WriteLine("id = {0}, City = {1}", cust.CustomerID,
-                //  cust.City);
-                this.lstSorteos.Items.Add(qrysorteos.sorteo);
+            if (this.cmbloteria.Items.Count > 0){
+                this.cmbloteria.SelectedIndex = 0;
+                string[] v = cmbloteria.Text.Split('-');
+                sr_sorteos(int.Parse(v[1]));
+            }
+
+            if (this.lstSorteos.Items.Count > 0 ){
+                this.lstSorteos.SetItemChecked(0, true);
+            }
+                
         }
+
+         public void sr_sorteos (int vr_key_codigo)
+        {
+            animalitos db = new animalitos(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=animalitos;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True");
+           
+            var query = (from qrysorteos in db.dbSorteos
+                         join qryhorario in db.dbhorarios on qrysorteos.ID_SORTEO equals qryhorario.IDSORTEOHR
+                         where qrysorteos.ESTATUS == "A" && qrysorteos.ID_SORTEO == vr_key_codigo 
+                         select new { qryhorario.HORA, qrysorteos.NOMBRE_SORTEO, qrysorteos.ID_SORTEO }).ToList();
+
+
+            this.lstSorteos.Items.Clear();
+            foreach (var aqui in query)
+
+                if (aqui.HORA >= DateTime.Now.TimeOfDay )
+                {
+                                       
+                    this.lstSorteos.Items.Add(aqui.HORA  + " - " + aqui.NOMBRE_SORTEO.ToString().ToUpper() + " - " + aqui.ID_SORTEO);
+                }
+
+
+        }
+        public void sr_loteria()
+        {
+            animalitos db = new animalitos(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=animalitos;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True");
+
+            var query = (from qrysorteos in db.dbSorteos
+                         where qrysorteos.ESTATUS == "A"
+                         select new {qrysorteos.NOMBRE_SORTEO, qrysorteos.ID_SORTEO }).ToList();
+
+
+            this.cmbloteria.Items.Clear();
+
+            foreach (var aqui in query)
+                
+                this.cmbloteria.Items.Add(aqui.NOMBRE_SORTEO.ToString().ToUpper() + " - " + aqui.ID_SORTEO);
+        }
+
+        public void sr_animalitos(int vr_key_loteria)
+        {
+            animalitos db = new animalitos(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=animalitos;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True");
+
+            var query = (from qryanimalito in db.dbanimalitos 
+                         where qryanimalito.IDSORTEOAN == vr_key_loteria 
+                         
+                         select new { qryanimalito.CODIGO , qryanimalito.NOMBRE_ANIMALITO  }).ToList();
+
+
+            this.Animales.Items.Clear();
+
+            foreach (var aqui in query)
+                this.Animales.Items.Add(aqui.CODIGO.ToString() + " - " + aqui.NOMBRE_ANIMALITO.ToString());
+                    
+        }
+
 
         private void Minz_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -80,18 +141,81 @@ namespace Jbanimalitosv2
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (Ticket.Items.Count <= 0) {
+            string msg = "";
 
-                foreach (object itemChecked in lstSorteos.CheckedItems) // obtengo el valor seleccionado 
-                {
-                    this.Ticket.Items.Add(itemChecked.ToString());
-                                    }
+            msg = validar();
 
-            }
+            if (msg == "") { 
+                if (Ticket.Items.Count <= 0) {
+
+                    foreach (object itemChecked in lstSorteos.CheckedItems) // obtengo el valor seleccionado 
+                    {
+                        this.Ticket.Items.Add(itemChecked.ToString());
+                                        }
+
+                }
            
-            this.Ticket.Items.Add(this.Animal.Text + " - " + this.Nombre.Text + " - " + this.Monto.Text);
+                if (Animales.CheckedItems.Count > 0 )
+                {
+                    this.Animal.Text = "";
+                    this.Nombre.Text = "";
+                    foreach (object seleccionados in Animales.CheckedItems)
+                    {
+                        this.Ticket.Items.Add(seleccionados.ToString() + " - " + this.Monto.Text );
+                    }
+                }
+                else
+                {
+                    this.Ticket.Items.Add(this.Animal.Text + " - " + this.Nombre.Text + " - " + this.Monto.Text);
 
-            Calcular();
+                }
+
+                
+
+                Calcular();
+                deseleccionar();
+            }else
+            {
+                MessageBox.Show(msg, "Faltan Campos", MessageBoxButtons.OK , MessageBoxIcon.Information  );
+            }
+        }
+        
+
+        public void deseleccionar ()
+        {
+            for (int i = 0; i < Animales.Items.Count; i++)
+                Animales.SetItemCheckState(i, (false  ? CheckState.Checked : CheckState.Unchecked));
+        }
+
+        public string validar()
+        {
+            string msg = "";
+            int cont = 0;
+
+            if (Animales.CheckedItems.Count > 0 )
+            {
+
+                if (this.Monto.Text == "") {
+                    cont += 1;
+                    msg = msg + " Debe Ingresar el monto " + Environment.NewLine;
+                }
+            }else
+            {
+                if (this.Animal.Text == "")
+                {
+                    cont += 1;
+                    msg = msg + " Indique el codigo de la fruta o animal" + Environment.NewLine;
+                }
+                if (this.Monto.Text == "")
+                {
+                    cont += 1;
+                    msg = msg + " Indique el monto de la jugada" + Environment.NewLine;
+                }
+            }
+
+            return msg;
+
+            
         }
 
         public void Calcular()
@@ -148,7 +272,8 @@ namespace Jbanimalitosv2
 
         private void Animales_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.Animales.Text = "";
+            this.Animal.Text = "";
+            this.Nombre.Text = "";
         }
 
         private void linkLabel8_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -191,6 +316,67 @@ namespace Jbanimalitosv2
                 return;
             }
 
+        }
+
+        private void cmbloteria_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //private string[] v;
+
+            string [] v = cmbloteria.Text.Split('-');
+
+            sr_animalitos( int.Parse(v[1]));
+
+            sr_sorteos(int.Parse(v[1]));
+        }
+
+        private void Animal_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Char.IsDigit(e.KeyChar))
+            {
+
+                e.Handled = false;
+
+            }
+            else if (Char.IsControl(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            //SI lo activas permite usar el espacio
+            //else if (Char.IsSeparator(e.KeyChar))
+            //{
+            //   e.Handled = false;
+            //}
+            else
+            {
+                e.Handled = true;
+            }
+
+           
+
+            
+
+
+        }
+
+        public void sr_nombre_Animalito(string vr_key_codigo, int vr_key_sorteo)
+        {
+            animalitos db = new animalitos(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=animalitos;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True");
+
+            var query = (from qryanimalito in db.dbanimalitos
+                         where qryanimalito.IDSORTEOAN == vr_key_sorteo && qryanimalito.CODIGO == vr_key_codigo 
+                         select new { qryanimalito.CODIGO, qryanimalito.NOMBRE_ANIMALITO }).ToList();
+
+
+            this.Nombre.Text = "";
+
+            foreach (var aqui in query)
+                this.Nombre.Text = aqui.NOMBRE_ANIMALITO.ToString();
+        }
+
+        private void Animal_TextChanged(object sender, EventArgs e)
+        {
+            string[] v = cmbloteria.Text.Split('-');
+            sr_nombre_Animalito(Animal.Text.ToString(), int.Parse(v[1]));
         }
     }
 }

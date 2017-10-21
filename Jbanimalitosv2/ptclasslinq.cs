@@ -9,8 +9,9 @@ namespace Jbanimalitosv2
 {
     public partial class animalitos : DataContext
     {
-        public Table<Sorteos__> dbSorteos;
-        public Table<Horarios> dbhorarios;
+        public Table<Tbl_SORTEO> dbSorteos;
+        public Table<TBL_HORARIOS> dbhorarios;
+        public Table<TBL_ANIMALITOS> dbanimalitos;
         public animalitos(string connection) : base(connection) { }
     }
 }

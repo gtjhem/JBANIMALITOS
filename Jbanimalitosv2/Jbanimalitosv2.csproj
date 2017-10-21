@@ -62,10 +62,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataClasses1.designer.cs">
+    <Compile Include="animalitosDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DataClasses1.dbml</DependentUpon>
+      <DependentUpon>animalitosDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="CLS_LINQ_ANMLT.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CLS_LINQ_ANMLT.dbml</DependentUpon>
     </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -76,9 +81,8 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ptclasslinq.cs" />
-    <None Include="ClassDiagram1.cd" />
-    <None Include="DataClasses1.dbml.layout">
-      <DependentUpon>DataClasses1.dbml</DependentUpon>
+    <None Include="CLS_LINQ_ANMLT.dbml.layout">
+      <DependentUpon>CLS_LINQ_ANMLT.dbml</DependentUpon>
     </None>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
@@ -92,9 +96,20 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="DataClasses1.dbml">
+    <None Include="animalitosDataSet.xsc">
+      <DependentUpon>animalitosDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="animalitosDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>animalitosDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="animalitosDataSet.xss">
+      <DependentUpon>animalitosDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="CLS_LINQ_ANMLT.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>DataClasses1.designer.cs</LastGenOutput>
+      <LastGenOutput>CLS_LINQ_ANMLT.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
     <None Include="Properties\Settings.settings">

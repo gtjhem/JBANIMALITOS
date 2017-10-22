@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Jbanimalitosv2
 {
     public partial class animalitos : DataContext
@@ -12,6 +13,7 @@ namespace Jbanimalitosv2
         public Table<Tbl_SORTEO> dbSorteos;
         public Table<TBL_HORARIOS> dbhorarios;
         public Table<TBL_ANIMALITOS> dbanimalitos;
+        
         public animalitos(string connection) : base(connection) { }
     }
 }

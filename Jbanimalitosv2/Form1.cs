@@ -15,10 +15,11 @@ using System.Windows.Forms;
 
 namespace Jbanimalitosv2
 {
-
+     
 
     public partial class Form1 : Form
     {
+        Utilidades CN = new Utilidades();
 
 
         public Form1()
@@ -42,7 +43,7 @@ namespace Jbanimalitosv2
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            
             KeyCreator empezar = new KeyCreator();
 
             string ser = "";
@@ -70,7 +71,7 @@ namespace Jbanimalitosv2
 
          public void sr_sorteos (int vr_key_codigo)
         {
-            animalitos db = new animalitos(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=animalitos;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True");
+            animalitos db = new animalitos(CN.CONEC);
            
             var query = (from qrysorteos in db.dbSorteos
                          join qryhorario in db.dbhorarios on qrysorteos.ID_SORTEO equals qryhorario.IDSORTEOHR
@@ -93,7 +94,9 @@ namespace Jbanimalitosv2
         }
         public void sr_loteria()
         {
-            animalitos db = new animalitos(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=animalitos;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True");
+            animalitos db = new animalitos(CN.CONEC );
+
+            
 
             var query = (from qrysorteos in db.dbSorteos
                          where qrysorteos.ESTATUS == "A"
@@ -109,7 +112,9 @@ namespace Jbanimalitosv2
 
         public void sr_animalitos(int vr_key_loteria)
         {
-            animalitos db = new animalitos(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=animalitos;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True");
+            
+            animalitos db = new animalitos(CN.CONEC);
+            
 
             var query = (from qryanimalito in db.dbanimalitos 
                          where qryanimalito.IDSORTEOAN == vr_key_loteria 
@@ -423,7 +428,7 @@ namespace Jbanimalitosv2
 
         public void sr_nombre_Animalito(string vr_key_codigo, int vr_key_sorteo)
         {
-            animalitos db = new animalitos(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=animalitos;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True");
+            animalitos db = new animalitos(CN.CONEC );
 
             var query = (from qryanimalito in db.dbanimalitos
                          where qryanimalito.IDSORTEOAN == vr_key_sorteo && qryanimalito.CODIGO == vr_key_codigo 

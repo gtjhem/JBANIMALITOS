@@ -7,10 +7,12 @@ using System.Windows.Forms;
 
 namespace Jbanimalitosv2
 {
-
+    
 
     static class Program
     {
+
+        
         /// <summary>
         /// Punto de entrada principal para la aplicación.
         /// </summary>

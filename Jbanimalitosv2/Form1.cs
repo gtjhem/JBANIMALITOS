@@ -71,61 +71,20 @@ namespace Jbanimalitosv2
 
          public void sr_sorteos (int vr_key_codigo)
         {
-            animalitos db = new animalitos(CN.CONEC);
-           
-            var query = (from qrysorteos in db.dbSorteos
-                         join qryhorario in db.dbhorarios on qrysorteos.ID_SORTEO equals qryhorario.IDSORTEOHR
-                         where qrysorteos.ESTATUS == "A" && qrysorteos.ID_SORTEO == vr_key_codigo 
-                         select new { qryhorario.HORA, qrysorteos.NOMBRE_SORTEO, qrysorteos.ID_SORTEO }).ToList();
 
-
-            this.lstSorteos.Items.Clear();
-            foreach (var aqui in query)
-
-                if (aqui.HORA >= DateTime.Now.TimeOfDay )
-                {
-                                       
-                    this.lstSorteos.Items.Add(aqui.HORA  + " - " + aqui.NOMBRE_SORTEO.ToString().ToUpper() + " - " + aqui.ID_SORTEO);
-                }
-
-                if (lstSorteos.Items.Count > 0 ) this.lstSorteos.SetItemChecked(0, true);
-
+            CN.sr_llenar_sorteos(ref lstSorteos, vr_key_codigo);            
 
         }
         public void sr_loteria()
         {
-            animalitos db = new animalitos(CN.CONEC );
-
-            
-
-            var query = (from qrysorteos in db.dbSorteos
-                         where qrysorteos.ESTATUS == "A"
-                         select new {qrysorteos.NOMBRE_SORTEO, qrysorteos.ID_SORTEO }).ToList();
-
-
-            this.cmbloteria.Items.Clear();
-
-            foreach (var aqui in query)
-                
-                this.cmbloteria.Items.Add(aqui.NOMBRE_SORTEO.ToString().ToUpper() + " - " + aqui.ID_SORTEO);
+           
+            CN.sr_llenar_loteria(ref cmbloteria);
         }
 
         public void sr_animalitos(int vr_key_loteria)
         {
-            
-            animalitos db = new animalitos(CN.CONEC);
-            
 
-            var query = (from qryanimalito in db.dbanimalitos 
-                         where qryanimalito.IDSORTEOAN == vr_key_loteria 
-                         
-                         select new { qryanimalito.CODIGO , qryanimalito.NOMBRE_ANIMALITO  }).ToList();
-
-
-            this.Animales.Items.Clear();
-
-            foreach (var aqui in query)
-                this.Animales.Items.Add(aqui.CODIGO.ToString() + " - " + aqui.NOMBRE_ANIMALITO.ToString());
+            CN.sr_llenar_animales(ref Animales, vr_key_loteria);
                     
         }
 
